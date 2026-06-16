@@ -22,6 +22,14 @@ class FakeOrders implements IOrders {
                     "distanceKm":50,
                     "fragile":false
                 };
+            case 1004:
+                return {
+                    "orderId":1004,
+                    "shippingType":"INTERNATIONAL",
+                    "weightKg":100,
+                    "distanceKm":50,
+                    "fragile":false
+                };
             case 1001:
             default:    
                 return {
@@ -56,4 +64,10 @@ describe("ShippingCalculator", () => {
 
         assert.equal(result, 27.4);
     });
+
+    it("should calculate INTERNATIONAL shipping", async () => {
+        const result = await calculator.calculateShipping(1004);
+
+        assert.equal(result, 150);
+    });  
 });
