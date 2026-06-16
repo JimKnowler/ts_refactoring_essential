@@ -1,6 +1,6 @@
 type ShippingType = "STANDARD" | "EXPRESS" | "OVERNIGHT";
 
-interface Order {
+export interface Order {
     orderId: number;
     shippingType: ShippingType | string;
     weightKg: number;
@@ -8,7 +8,11 @@ interface Order {
     fragile: boolean;
 }
 
-class Orders {
+export interface IOrders {
+    fetch(orderId: number): Promise<Order>;
+}
+
+export class Orders implements IOrders {
     async fetch(orderId: number): Promise<Order> {
         const response = await fetch(
             `https://codemanship.co.uk/api/orders.php?orderId=${orderId}`
@@ -26,7 +30,11 @@ class Orders {
 }
 
 export class ShippingCalculator {
-    private orders = new Orders();
+    private orders: IOrders;
+
+    constructor(orders: IOrders) {
+        this.orders = orders;
+    }
 
     async calculateShipping(orderId: number): Promise<number> {
         try {

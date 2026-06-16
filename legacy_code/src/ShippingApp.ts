@@ -1,4 +1,4 @@
-import {ShippingCalculator} from "./ShippingCalculator";
+import {ShippingCalculator, Orders} from "./ShippingCalculator";
 
 async function main() {
     const args = process.argv.slice(2);
@@ -15,7 +15,7 @@ async function main() {
         return;
     }
 
-    const calculator = new ShippingCalculator();
+    const calculator = new ShippingCalculator(new Orders());
 
     try {
         const cost = await calculator.calculateShipping(orderId);
