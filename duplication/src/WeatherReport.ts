@@ -52,8 +52,14 @@ export class Forecast {
         this.windSpeed = windSpeed;
     }
 
+    
+    capitalizeFirstLetter(str: string): string { 
+        if (!str) return str; 
+        return str.charAt(0).toUpperCase() + str.slice(1); 
+    }
+
     timeOfDay(): string {
-        return this.period;
+        return this.capitalizeFirstLetter(this.period);
     }
 
     getTemperature(): number {
