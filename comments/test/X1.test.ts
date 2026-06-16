@@ -14,7 +14,7 @@ describe("X1", () => {
             expected += i * i;
         }
 
-        const actual = X1.m(a, b);
+        const actual = X1.sumOfSquares(a, b);
 
         assert.equal(actual, expected);
     });

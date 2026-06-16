@@ -1,5 +1,5 @@
 export class X1 {
-    static m(lowerBound: number, upperBound: number): number {
+    static sumOfSquares(lowerBound: number, upperBound: number): number {
         let accumulatedSum = 0;
 
         for (let i = lowerBound; i <= upperBound; i++) {
