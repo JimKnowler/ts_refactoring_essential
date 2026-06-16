@@ -13,18 +13,10 @@ export class Product {
         this.onSale = onSale;
     }
 
-    public getPrice(): number {
-        return this.price;
-    }
-
-    public isOnSale(): boolean {
-        return this.onSale;
-    }
-
     public calculateFinalPrice(): number {
-        let price = this.getPrice();
+        let price = this.price;
 
-        if (this.isOnSale()) {
+        if (this.onSale) {
             price = price * 0.8;
         }
 
