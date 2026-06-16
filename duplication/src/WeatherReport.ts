@@ -1,33 +1,37 @@
 export class WeatherReport {
     formatDailyReport(forecasts: Forecast[], output: string[]): void {
         for (const forecast of forecasts) {
-            if (forecast.isMorning()) {
-                output.push(
-                    this.formatLine('Morning', forecast)
-                );
-            }
+            output.push(
+                this.formatLine(forecast)
+            );
+            // if (forecast.isMorning()) {
+            //     output.push(
+            //         this.formatLine('Morning', forecast)
+            //     );
+            // }
 
-            if (forecast.isAfternoon()) {
-                output.push(
-                    this.formatLine('Afternoon', forecast)
-                );
-            }
+            // if (forecast.isAfternoon()) {
+            //     output.push(
+            //         this.formatLine('Afternoon', forecast)
+            //     );
+            // }
 
-            if (forecast.isEvening()) {
-                output.push(
-                    this.formatLine('Evening', forecast)
-                );
-            }
+            // if (forecast.isEvening()) {
+            //     output.push(
+            //         this.formatLine('Evening', forecast)
+            //     );
+            // }
 
-            if (forecast.isNight()) {
-                output.push(
-                    this.formatLine('Night', forecast)
-                );
-            }
+            // if (forecast.isNight()) {
+            //     output.push(
+            //         this.formatLine('Night', forecast)
+            //     );
+            // }
         }
     }
 
-    formatLine(label: string, forecast: Forecast): string {
+    formatLine(forecast: Forecast): string {
+        let label = forecast.timeOfDay();
         const temp = forecast.getTemperature().toFixed(1);
         const condition = forecast.getCondition();
         const wind = forecast.getWindSpeed();
@@ -46,6 +50,10 @@ export class Forecast {
         this.temperature = temperature;
         this.condition = condition;
         this.windSpeed = windSpeed;
+    }
+
+    timeOfDay(): string {
+        return this.period;
     }
 
     getTemperature(): number {
