@@ -12,13 +12,7 @@ export class Order {
         
         let subtotal = this.calculateSubtotal();
 
-        // Discount rules
-        let discount = 0.0;
-        if (this.customer.isLoyal()) {
-            discount = subtotal * 0.10;
-        } else if (subtotal > 100) {
-            discount = subtotal * 0.05;
-        }
+        let discount = this.calculateDiscount(subtotal);
 
         // Tax calculation
         const taxableAmount = subtotal - discount;
@@ -45,6 +39,16 @@ export class Order {
         if (this.items.length === 0) {
             throw new Error("Order must contain items");
         }
+    }
+
+    private calculateDiscount(subtotal: number) {
+        let discount = 0.0;
+        if (this.customer.isLoyal()) {
+            discount = subtotal * 0.10;
+        } else if (subtotal > 100) {
+            discount = subtotal * 0.05;
+        }
+        return discount;
     }
 }
 
