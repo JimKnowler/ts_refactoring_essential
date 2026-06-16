@@ -1,13 +1,12 @@
 export class X1 {
     static m(lowerBound: number, upperBound: number): number {
-        let p = 0;
+        let accumulatedSum = 0;
 
         for (let i = lowerBound; i <= upperBound; i++) {
-            p += X1.square(i);
+            accumulatedSum += X1.square(i);
         }
 
-        // Return accumulated sum
-        return p;
+        return accumulatedSum;
     }
 
     static square(k: number): number {
