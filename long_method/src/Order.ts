@@ -8,14 +8,8 @@ export class Order {
     }
 
     public summarise(): OrderSummary {
-        // Validation
-        if (this.items == null) {
-            throw new Error("Items cannot be null");
-        }
-        if (this.items.length === 0) {
-            throw new Error("Order must contain items");
-        }
-
+        this.validateItems();
+        
         // Subtotal calculation
         let subtotal = 0.0;
         for (const item of this.items) {
@@ -38,6 +32,15 @@ export class Order {
         const total = taxableAmount + tax;
 
         return new OrderSummary(subtotal, discount, tax, total);
+    }
+
+    private validateItems() {
+        if (this.items == null) {
+            throw new Error("Items cannot be null");
+        }
+        if (this.items.length === 0) {
+            throw new Error("Order must contain items");
+        }
     }
 }
 
