@@ -1,5 +1,5 @@
 export class CustomerService {
-    constructor(private emailValidator: EmailValidator) {}
+    private emailValidator: EmailValidator = new EmailValidator();
 
     public isValidEmail(email: string | null): boolean {
         return this.emailValidator.isValidEmail(email);
