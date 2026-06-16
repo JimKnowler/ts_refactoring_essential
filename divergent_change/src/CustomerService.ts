@@ -1,12 +1,8 @@
 export class CustomerService {
+    constructor(private emailValidator: EmailValidator) {}
 
     public isValidEmail(email: string | null): boolean {
-        if (email === null) {
-            return false;
-        }
-
-        const emailRegex = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$/;
-        return emailRegex.test(email);
+        return this.emailValidator.isValidEmail(email);
     }
 
     public formatDisplayName(firstName: string, lastName: string): string {
@@ -24,5 +20,16 @@ export class CustomerService {
             return "DORMANT";
         }
         return "ACTIVE";
+    }
+}
+
+class EmailValidator {
+    public isValidEmail(email: string | null): boolean {
+        if (email === null) {
+            return false;
+        }
+
+        const emailRegex = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$/;
+        return emailRegex.test(email);
     }
 }
