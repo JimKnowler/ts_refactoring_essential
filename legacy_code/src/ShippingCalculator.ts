@@ -8,20 +8,29 @@ interface Order {
     fragile: boolean;
 }
 
+class Orders {
+    async fetch(orderId: number): Promise<Order> {
+        const response = await fetch(
+            `https://codemanship.co.uk/api/orders.php?orderId=${orderId}`
+        );
+
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+
+        const json = await response.json();
+        const order: Order = json;
+
+        return order;
+    }
+}
+
 export class ShippingCalculator {
+    private orders = new Orders();
 
     async calculateShipping(orderId: number): Promise<number> {
         try {
-            const response = await fetch(
-                `https://codemanship.co.uk/api/orders.php?orderId=${orderId}`
-            );
-
-            if (!response.ok) {
-                throw new Error(`HTTP error: ${response.status}`);
-            }
-
-            const json = await response.json();
-            const order: Order = json;
+            const order = await this.orders.fetch(orderId);
 
             switch (order.shippingType) {
                 case "STANDARD":
