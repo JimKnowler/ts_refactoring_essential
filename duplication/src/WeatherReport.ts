@@ -1,35 +1,37 @@
 export class WeatherReport {
     formatDailyReport(forecasts: Forecast[], output: string[]): void {
         for (const forecast of forecasts) {
-
-            const temp = forecast.getTemperature().toFixed(1);
-            const condition = forecast.getCondition();
-            const wind = forecast.getWindSpeed();
-
             if (forecast.isMorning()) {
                 output.push(
-                    `Morning: ${temp}°C, ${condition}, wind ${wind}km/h`
+                    this.formatLine('Morning', forecast)
                 );
             }
 
             if (forecast.isAfternoon()) {
                 output.push(
-                    `Afternoon: ${temp}°C, ${condition}, wind ${wind}km/h`
+                    this.formatLine('Afternoon', forecast)
                 );
             }
 
             if (forecast.isEvening()) {
                 output.push(
-                    `Evening: ${temp}°C, ${condition}, wind ${wind}km/h`
+                    this.formatLine('Evening', forecast)
                 );
             }
 
             if (forecast.isNight()) {
                 output.push(
-                    `Night: ${temp}°C, ${condition}, wind ${wind}km/h`
+                    this.formatLine('Night', forecast)
                 );
             }
         }
+    }
+
+    formatLine(label: string, forecast: Forecast): string {
+        const temp = forecast.getTemperature().toFixed(1);
+        const condition = forecast.getCondition();
+        const wind = forecast.getWindSpeed();
+        return `${label}: ${temp}°C, ${condition}, wind ${wind}km/h`
     }
 }
 
