@@ -10,11 +10,7 @@ export class Order {
     public summarise(): OrderSummary {
         this.validateItems();
         
-        // Subtotal calculation
-        let subtotal = 0.0;
-        for (const item of this.items) {
-            subtotal += item.getPrice() * item.getQuantity();
-        }
+        let subtotal = this.calculateSubtotal();
 
         // Discount rules
         let discount = 0.0;
@@ -32,6 +28,14 @@ export class Order {
         const total = taxableAmount + tax;
 
         return new OrderSummary(subtotal, discount, tax, total);
+    }
+
+    private calculateSubtotal() {
+        let subtotal = 0.0;
+        for (const item of this.items) {
+            subtotal += item.getPrice() * item.getQuantity();
+        }
+        return subtotal;
     }
 
     private validateItems() {
