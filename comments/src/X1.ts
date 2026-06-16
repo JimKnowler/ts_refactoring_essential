@@ -3,13 +3,9 @@ export class X1 {
         let accumulatedSum = 0;
 
         for (let i = lowerBound; i <= upperBound; i++) {
-            accumulatedSum += X1.square(i);
+            accumulatedSum += i * i;
         }
 
         return accumulatedSum;
-    }
-
-    static square(k: number): number {
-        return k * k;
     }
 }
