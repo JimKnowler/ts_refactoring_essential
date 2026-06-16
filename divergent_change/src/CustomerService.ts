@@ -1,6 +1,7 @@
 export class CustomerService {
     private emailValidator: EmailValidator = new EmailValidator();
     private customerDisplayFormatter: CustomerDisplayFormatter = new CustomerDisplayFormatter();
+    private loyaltyService = new LoyaltyService();
 
     public isValidEmail(email: string | null): boolean {
         return this.emailValidator.isValidEmail(email);
@@ -11,7 +12,7 @@ export class CustomerService {
     }
 
     public calculateLoyaltyPoints(numberOfPurchases: number): number {
-        return numberOfPurchases * 10;
+        return this.loyaltyService.calculateLoyaltyPoints(numberOfPurchases);
     }
 
     public determineAccountStatus(daysSinceLastLogin: number): string {
@@ -38,5 +39,11 @@ class EmailValidator {
 class CustomerDisplayFormatter {
     public formatDisplayName(firstName: string, lastName: string): string {
         return firstName.trim() + " " + lastName.trim().toUpperCase();
+    }
+}
+
+class LoyaltyService {
+    public calculateLoyaltyPoints(numberOfPurchases: number): number {
+        return numberOfPurchases * 10;
     }
 }
