@@ -12,7 +12,7 @@ export class Order {
         
         let subtotal = this.calculateSubtotal();
 
-        let discount = this.calculateDiscount(subtotal);
+        let discount = this.customer.calculateDiscount(subtotal);
 
         const taxableAmount = subtotal - discount;
         let tax = this.calculateTax(taxableAmount);
@@ -39,16 +39,6 @@ export class Order {
         }
     }
 
-    private calculateDiscount(subtotal: number) {
-        let discount = 0.0;
-        if (this.customer.isLoyal()) {
-            discount = subtotal * 0.10;
-        } else if (subtotal > 100) {
-            discount = subtotal * 0.05;
-        }
-        return discount;
-    }
-
     private calculateTax(taxableAmount: number) {
         const tax = taxableAmount * 0.20;
 
@@ -70,6 +60,16 @@ export class Customer {
 
     public isLoyal(): boolean {
         return this.loyal;
+    }
+
+    public calculateDiscount(subtotal: number) {
+        let discount = 0.0;
+        if (this.isLoyal()) {
+            discount = subtotal * 0.10;
+        } else if (subtotal > 100) {
+            discount = subtotal * 0.05;
+        }
+        return discount;
     }
 }
 
