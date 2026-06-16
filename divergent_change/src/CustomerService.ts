@@ -1,6 +1,6 @@
 export class CustomerService {
-    private emailValidator: EmailValidator = new EmailValidator();
-    private customerDisplayFormatter: CustomerDisplayFormatter = new CustomerDisplayFormatter();
+    private emailValidator = new EmailValidator();
+    private customerDisplayFormatter = new CustomerDisplayFormatter();
     private loyaltyService = new LoyaltyService();
 
     public isValidEmail(email: string | null): boolean {
