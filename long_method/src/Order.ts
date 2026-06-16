@@ -14,10 +14,9 @@ export class Order {
 
         let discount = this.calculateDiscount(subtotal);
 
-        // Tax calculation
         const taxableAmount = subtotal - discount;
-        const tax = taxableAmount * 0.20;
-
+        let tax = this.calculateTax(taxableAmount);
+        
         // Total calculation
         const total = taxableAmount + tax;
 
@@ -49,6 +48,12 @@ export class Order {
             discount = subtotal * 0.05;
         }
         return discount;
+    }
+
+    private calculateTax(taxableAmount: number) {
+        const tax = taxableAmount * 0.20;
+
+        return tax;
     }
 }
 
