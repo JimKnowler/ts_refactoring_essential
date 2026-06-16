@@ -1,12 +1,6 @@
 export class PriceCalculator {
     public calculateFinalPrice(product: Product): number {
-        let price = product.getPrice();
-
-        if (product.isOnSale()) {
-            price = price * 0.8;
-        }
-
-        return price;
+        return product.calculateFinalPrice();
     }
 }
 
@@ -25,5 +19,15 @@ export class Product {
 
     public isOnSale(): boolean {
         return this.onSale;
+    }
+
+    public calculateFinalPrice(): number {
+        let price = this.getPrice();
+
+        if (this.isOnSale()) {
+            price = price * 0.8;
+        }
+
+        return price;
     }
 }
