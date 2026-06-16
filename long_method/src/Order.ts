@@ -17,8 +17,7 @@ export class Order {
         const taxableAmount = subtotal - discount;
         let tax = this.calculateTax(taxableAmount);
         
-        // Total calculation
-        const total = taxableAmount + tax;
+        const total = this.calculateTotal(taxableAmount, tax);
 
         return new OrderSummary(subtotal, discount, tax, total);
     }
@@ -55,6 +54,11 @@ export class Order {
 
         return tax;
     }
+
+    private calculateTotal(taxableAmount: number, tax: number) {
+        return taxableAmount + tax;
+    }
+
 }
 
 export class Customer {
